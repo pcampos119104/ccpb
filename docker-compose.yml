@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+    app:
+        build: .
+        container_name: ccpb-app
+        command: python manage.py runserver 0.0.0.0:8000
+        volumes:
+            - .:/home/django/app
+        ports:
+            - "8000:8000"
+        depends_on:
+            - db
+
+    db:
+        image: postgres
+        container_name: ccpb-db
+        tty: true
+        environment:
+            - POSTGRES_DB=members_ccpb
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=root
+        volumes:
+            - ccpb-pgdata:/var/lib/postgres/data
+
+volumes:
+    ccpb-pgdata:
+        external: true
+
