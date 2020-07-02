@@ -11,17 +11,29 @@ services:
             - "8000:8000"
         depends_on:
             - db
+        env_file:
+          - ./.env.dev
 
     db:
         image: postgres
         container_name: ccpb-db
         tty: true
         environment:
-            - POSTGRES_DB=members_ccpb
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=root
+            - POSTGRES_DB=ccpb_db
+            - POSTGRES_USER=ccpbuser
+            - POSTGRES_PASSWORD=etWejkaKv5w7LbQn
         volumes:
             - ccpb-pgdata:/var/lib/postgres/data
+
+    pgadmin:
+        image: dpage/pgadmin4
+        container_name: ccpb-pgadmin
+        tty: true
+        environment:
+          - PGADMIN_DEFAULT_EMAIL=admin@user.com
+          - PGADMIN_DEFAULT_PASSWORD=123456
+        ports:
+        - "9000:80"
 
 volumes:
     ccpb-pgdata:
