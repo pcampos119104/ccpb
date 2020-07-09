@@ -5,6 +5,7 @@ services:
         build: .
         container_name: ccpb-app
         command: python manage.py runserver 0.0.0.0:8000
+        restart: always
         volumes:
             - .:/home/django/app
         ports:

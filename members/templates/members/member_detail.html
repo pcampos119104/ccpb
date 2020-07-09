@@ -1,0 +1,10 @@
+{% extends "base_layout.html" %}
+{% block content %}
+<h1>{{ member.name }}</h1>
+<ul>
+{% for p in phone_list %}
+    <li>{{ p.number }}</li>
+{% endfor %}
+<a href="{% url 'members:delete' member.id%}">Excluir</a>
+</ul>
+{% endblock %}

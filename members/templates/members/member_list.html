@@ -1,0 +1,17 @@
+{% extends "base_layout.html" %}
+{% block content %}
+{% if object_list %}
+    <table>
+    {% for m in object_list %}
+        <tr>
+        <th><a href="{% url 'members:detail' m.id %}">{{ m.name }}</a></th>
+        <th><a href="{% url 'members:update' m.id%}">Atualizar</a></th>
+        <th><a href="{% url 'members:delete' m.id%}">Excluir</a></th>
+        </tr>
+    {% endfor %}
+    </table>
+{% else %}
+    <p>Nenhum membro encontrado.</p>
+{% endif %}
+    <a href="{% url 'members:create' %}">Incluir</a></li>
+{% endblock %}

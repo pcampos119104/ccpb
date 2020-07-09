@@ -1,0 +1,7 @@
+{% extends "base_layout.html" %}
+{% block content %}
+<form method="post">{% csrf_token %}
+    <p>Deseja remover "{{ object }}"?</p>
+    <input type="submit" value="Confirm">
+</form>
+{% endblock %}

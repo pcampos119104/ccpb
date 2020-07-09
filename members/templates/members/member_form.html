@@ -1,0 +1,15 @@
+{% extends "base_layout.html" %}
+{% block content %}
+<h1>Membros</h1>
+<form method="post">
+    <table>
+    {% csrf_token %}
+    {{ form.as_table }}
+</table>
+    <table>
+    <h2>Telefone</h2>
+    {{ phone.as_table }}
+    </table>
+    <input type="submit" value="Save">
+</form>
+{% endblock %}
