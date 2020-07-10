@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views import generic
 from django.forms.models import inlineformset_factory
@@ -5,12 +6,12 @@ from django.forms.models import inlineformset_factory
 from members.models import Member, Phone
 
 
-class ListView(generic.list.ListView):
+class ListView(LoginRequiredMixin, generic.list.ListView):
     model = Member
     context_object_name = 'members_list'
 
 
-class DetailView(generic.detail.DetailView):
+class DetailView(LoginRequiredMixin, generic.detail.DetailView):
     model = Member
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -18,7 +19,7 @@ class DetailView(generic.detail.DetailView):
         return context
 
 
-class CreateView(generic.edit.CreateView):
+class CreateView(LoginRequiredMixin, generic.edit.CreateView):
     PhoneFormset = inlineformset_factory(Member, Phone, fields=('number', ))
     model = Member
     fields = ['name', 'address']
@@ -42,7 +43,7 @@ class CreateView(generic.edit.CreateView):
         return super().form_valid(form)
 
 
-class UpdateView(generic.edit.UpdateView):
+class UpdateView(LoginRequiredMixin, generic.edit.UpdateView):
     PhoneFormset = inlineformset_factory(Member, Phone, fields=('number', ))
     model = Member
     fields = ['name', 'address']
@@ -66,6 +67,6 @@ class UpdateView(generic.edit.UpdateView):
         return super().form_valid(form)
 
 
-class DeleteView(generic.edit.DeleteView):
+class DeleteView(LoginRequiredMixin, generic.edit.DeleteView):
     model = Member
     success_url = reverse_lazy('members:list')
