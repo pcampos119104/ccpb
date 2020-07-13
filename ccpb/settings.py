@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'members.apps.MembersConfig',
     'accounts.apps.AccountsConfig',
+    'pdfgen.apps.PdfgenConfig',
 ]
 
 MIDDLEWARE = [

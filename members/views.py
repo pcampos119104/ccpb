@@ -13,6 +13,7 @@ class ListView(LoginRequiredMixin, generic.list.ListView):
 
 class DetailView(LoginRequiredMixin, generic.detail.DetailView):
     model = Member
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['phone_list'] = Phone.objects.filter(member__id=self.object.id)
@@ -20,7 +21,7 @@ class DetailView(LoginRequiredMixin, generic.detail.DetailView):
 
 
 class CreateView(LoginRequiredMixin, generic.edit.CreateView):
-    PhoneFormset = inlineformset_factory(Member, Phone, fields=('number', ))
+    PhoneFormset = inlineformset_factory(Member, Phone, fields=('number',))
     model = Member
     fields = ['name', 'address']
     success_url = reverse_lazy('members:list')
@@ -44,7 +45,7 @@ class CreateView(LoginRequiredMixin, generic.edit.CreateView):
 
 
 class UpdateView(LoginRequiredMixin, generic.edit.UpdateView):
-    PhoneFormset = inlineformset_factory(Member, Phone, fields=('number', ))
+    PhoneFormset = inlineformset_factory(Member, Phone, fields=('number',))
     model = Member
     fields = ['name', 'address']
     success_url = reverse_lazy('members:list')
