@@ -1,0 +1,8 @@
+{% extends "members/base_members.html" %}
+{% block content_display %}
+<form class="center" method="post">
+    {% csrf_token %}
+    <h5>Deseja remover "{{ object }}"?</h5>
+    <input class="waves-effect waves-light btn " type="submit" value="Confirma">
+</form>
+{% endblock %}

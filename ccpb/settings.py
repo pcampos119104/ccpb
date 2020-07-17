@@ -37,6 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
+=======
+    'materialize',
+    'members.apps.MembersConfig',
+    'accounts.apps.AccountsConfig',
+    'pdfgen.apps.PdfgenConfig',
+>>>>>>> 6d4a99e... pdfgen
 ]
 
 MIDDLEWARE = [

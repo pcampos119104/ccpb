@@ -23,6 +23,19 @@ services:
         volumes:
             - ccpb-pgdata:/var/lib/postgres/data
 
+<<<<<<< HEAD
+=======
+#    pgadmin:
+#        image: dpage/pgadmin4
+#        container_name: ccpb-pgadmin
+#        tty: true
+#        environment:
+#          - PGADMIN_DEFAULT_EMAIL=admin@user.com
+#          - PGADMIN_DEFAULT_PASSWORD=123456
+#        ports:
+#        - "9000:80"
+
+>>>>>>> 6d4a99e... pdfgen
 volumes:
     ccpb-pgdata:
         external: true

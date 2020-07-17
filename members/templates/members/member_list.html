@@ -1,0 +1,41 @@
+{% extends "members/base_members.html" %}
+{% block content_display %}
+    <nav>
+        <div class="nav-wrapper light-blue lighten-2">
+            <form id="search_form" method="post" class="left">
+                {% csrf_token %}
+                <div class="input-field">
+                    <input id="search" type="search" required>
+                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                    <i class="material-icons">close</i>
+                </div>
+            </form>
+            <ul class="right hide-on-med-and-down">
+                <li>
+                    <button type="submit" form="list_form" class="waves-effect waves-light btn-flat">
+                        Gerar carteirinhas
+                    </button>
+		</li>
+            </ul>
+        </div>
+    </nav>
+    <form id="list_form" action="{{ action }}" method="post">
+                {% csrf_token %}
+        {% if object_list %}
+            <table class="striped">
+                {% for m in object_list %}
+                    <tr>
+                        <th><label>
+                            <input type="checkbox" name="ck_members"class="filled-in" type="checkbox" id="{{ m.id }}"
+                                   value="{{ m.id }}"/>
+                            <span> </span>
+                        </label></th>
+                        <th><a href="{% url 'members:detail' m.id %}"><h5>{{ m.name }}</h5></a></th>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>Nenhum membro encontrado.</p>
+        {% endif %}
+    </form>
+{% endblock %}

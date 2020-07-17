@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+{% if object_list %}
+    <table>
+    {% for m in object_list %}
+        <tr>
+        <th>{{ m.name }}</th>
+        <th>Excluir</th>
+        </tr>
+    {% endfor %}
+    </table>
+{% endif %}
+{% endblock %}
