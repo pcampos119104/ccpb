@@ -1,14 +1,20 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import generic
+from django.http import HttpResponseRedirect
 from django.forms.models import inlineformset_factory
 
 from members.models import Member, Phone
+from pdfgen.views import HtmlPdfView
 
 
-class ListView(LoginRequiredMixin, generic.list.ListView):
+class MemberListView(LoginRequiredMixin, generic.list.ListView):
     model = Member
     context_object_name = 'members_list'
+
+    def post(self, request, *args, **kwargs):
+        request.session['print_members_id'] = self.request.POST.getlist('ck_members')
+        return HttpResponseRedirect(reverse('pdfgen:pdfgenerator')) 
 
 
 class DetailView(LoginRequiredMixin, generic.detail.DetailView):

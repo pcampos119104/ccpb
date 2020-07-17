@@ -1,21 +1,13 @@
-{% extends "base_layout.html" %}
+{% extends "base.html" %}
 {% block content %}
 {% if object_list %}
-    {% if user.is_authenticated %}
-        <h1>Logado</h1>
-    {% endif %}
     <table>
     {% for m in object_list %}
         <tr>
-        <th><a href="{% url 'members:detail' m.id %}">{{ m.name }}</a></th>
-        <th><a href="{% url 'members:update' m.id%}">Atualizar</a></th>
-        <th><a href="{% url 'members:delete' m.id%}">Excluir</a></th>
+        <th>{{ m.name }}</th>
+        <th>Excluir</th>
         </tr>
     {% endfor %}
     </table>
-{% else %}
-    <p>Nenhum membro encontrado.</p>
 {% endif %}
-    <a href="{% url 'members:create' %}">Incluir</a></li>
-    <p><a href="{% url 'accounts:logout' %}">Deslogar</a></p>
 {% endblock %}

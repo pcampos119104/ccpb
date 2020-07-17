@@ -1,3 +1,4 @@
 Django==3.0.8
 psycopg2==2.8.5
 django-weasyprint==1.0.1
+django-materialize==1.0.1a2

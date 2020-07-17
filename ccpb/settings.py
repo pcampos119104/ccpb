@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'materialize',
     'members.apps.MembersConfig',
     'accounts.apps.AccountsConfig',
     'pdfgen.apps.PdfgenConfig',

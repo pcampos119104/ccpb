@@ -1,10 +1,11 @@
-{% extends "base_layout.html" %}
-{% block content %}
+{% extends "members/base_members.html" %}
+{% block content_display %}
 <h1>{{ member.name }}</h1>
 <ul>
 {% for p in phone_list %}
     <li>{{ p.number }}</li>
 {% endfor %}
-<a href="{% url 'members:delete' member.id%}">Excluir</a>
+    <th><a class="waves-effect waves-light btn" href="{% url 'members:update' member.id %}">Atualizar</a></th>
+    <th><a class="waves-effect waves-light btn" href="{% url 'members:delete' member.id %}">Excluir</a></th>
 </ul>
 {% endblock %}

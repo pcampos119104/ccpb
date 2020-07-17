@@ -26,15 +26,15 @@ services:
         volumes:
             - ccpb-pgdata:/var/lib/postgres/data
 
-    pgadmin:
-        image: dpage/pgadmin4
-        container_name: ccpb-pgadmin
-        tty: true
-        environment:
-          - PGADMIN_DEFAULT_EMAIL=admin@user.com
-          - PGADMIN_DEFAULT_PASSWORD=123456
-        ports:
-        - "9000:80"
+#    pgadmin:
+#        image: dpage/pgadmin4
+#        container_name: ccpb-pgadmin
+#        tty: true
+#        environment:
+#          - PGADMIN_DEFAULT_EMAIL=admin@user.com
+#          - PGADMIN_DEFAULT_PASSWORD=123456
+#        ports:
+#        - "9000:80"
 
 volumes:
     ccpb-pgdata:
