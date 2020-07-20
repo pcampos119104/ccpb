@@ -3,14 +3,24 @@ from django.urls import reverse_lazy, reverse
 from django.views import generic
 from django.http import HttpResponseRedirect
 from django.forms.models import inlineformset_factory
+from django_filters.views import FilterView
 
 from members.models import Member, Phone
 from pdfgen.views import HtmlPdfView
+from members.filters import MemberFilter
 
 
-class MemberListView(LoginRequiredMixin, generic.list.ListView):
+class MemberListView(LoginRequiredMixin, FilterView):
     model = Member
     context_object_name = 'members_list'
+    filter_class = MemberFilter
+ 
+    '''
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = MemberFilter(self.request.GET, queryset=self.get_queryset())
+        return context
+    '''
 
     def post(self, request, *args, **kwargs):
         request.session['print_members_id'] = self.request.POST.getlist('ck_members')

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'members.apps.MembersConfig',
     'accounts.apps.AccountsConfig',
     'pdfgen.apps.PdfgenConfig',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

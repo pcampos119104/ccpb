@@ -1,15 +1,14 @@
 {% extends "members/base_members.html" %}
 {% block content_display %}
-    <nav>
-        <div class="nav-wrapper light-blue lighten-2">
-            <form id="search_form" method="post" class="left">
+             <form id="search_form" action="" method="get" class="left">
                 {% csrf_token %}
                 <div class="input-field">
-                    <input id="search" type="search" required>
-                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                    <i class="material-icons">close</i>
+			{{ filter.form.as_p }}
+			<input type="submit" />
                 </div>
             </form>
+    <nav>
+        <div class="nav-wrapper light-blue lighten-2">
             <ul class="right hide-on-med-and-down">
                 <li>
                     <button type="submit" form="list_form" class="waves-effect waves-light btn-flat">
@@ -20,10 +19,9 @@
         </div>
     </nav>
     <form id="list_form" action="{{ action }}" method="post">
-                {% csrf_token %}
-        {% if object_list %}
+            {% csrf_token %}
             <table class="striped">
-                {% for m in object_list %}
+                {% for m in filter.qs %}
                     <tr>
                         <th><label>
                             <input type="checkbox" name="ck_members"class="filled-in" type="checkbox" id="{{ m.id }}"
@@ -34,8 +32,5 @@
                     </tr>
                 {% endfor %}
             </table>
-        {% else %}
-            <p>Nenhum membro encontrado.</p>
-        {% endif %}
     </form>
 {% endblock %}
