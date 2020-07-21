@@ -24,7 +24,8 @@ services:
             - POSTGRES_USER=ccpbuser
             - POSTGRES_PASSWORD=etWejkaKv5w7LbQn
         volumes:
-            - ccpb-pgdata:/var/lib/postgres/data
+            - ./ccpb-pgdata:/var/lib/postgres/data
+              
 
 #    pgadmin:
 #        image: dpage/pgadmin4

@@ -6,5 +6,5 @@ class MemberFilter(FilterSet):
     class Meta:
         model = Member
         fields = {
-                'name': ['icontains'],
+                'name_member': ['icontains'],
                 }

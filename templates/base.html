@@ -1,4 +1,3 @@
-{% extends 'materialize/materialize_base_dev.html' %}
 {% block title_content %}ccpb{% endblock %}
 
 {% block content %}
@@ -6,15 +5,26 @@
         <div class="col s12 light-blue lighten-1 ">
             <h1 class="light-blue-text text-lighten-5 center">Comunidade Cristã Parque Bristol</h1>
         </div>
+	<ul class="nav flex-column">
+		  <li class="nav-item">
+		    <a class="nav-link" href="{% url 'members:list' %}">Membros</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link active" href="{% url 'members:create' %}">Incluir</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" href="{% url 'accounts:logout' %}">Sair</a></p>
+		  </li>
+		</ul>
         <div class="col s12 m2 l2 card-panel grey lighten-3">
             {% block sidebar %}
                 <p>
-	 	<a href="{% url 'members:list' %}">Membros</a>
+	 	<a 
 		</p>
                 <p>
-                    <a href="{% url 'members:create' %}">Incluir</a>
+                    <a 
                 </p>
-                <p><a href="{% url 'accounts:logout' %}">Sair</a></p>
+                <p><a 
             {% endblock %}
         </div>
         <div class="col s12 m10 l10 card-panel">
