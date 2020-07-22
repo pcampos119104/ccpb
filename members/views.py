@@ -8,6 +8,7 @@ from django_filters.views import FilterView
 from members.models import Member, Phone
 from pdfgen.views import HtmlPdfView
 from members.filters import MemberFilter
+from members.forms import MemberForm
 
 
 class MemberListView(LoginRequiredMixin, FilterView):
@@ -15,12 +16,10 @@ class MemberListView(LoginRequiredMixin, FilterView):
     context_object_name = 'members_list'
     filter_class = MemberFilter
  
-    '''
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter'] = MemberFilter(self.request.GET, queryset=self.get_queryset())
         return context
-    '''
 
     def post(self, request, *args, **kwargs):
         request.session['print_members_id'] = self.request.POST.getlist('ck_members')
@@ -37,19 +36,10 @@ class DetailView(LoginRequiredMixin, generic.detail.DetailView):
 
 
 class CreateView(LoginRequiredMixin, generic.edit.CreateView):
-    PhoneFormset = inlineformset_factory(Member, Phone, fields=('number',))
-    model = Member
-    fields = ['name', 'address']
+    form_class = MemberForm
+    template_name = 'members/member_form.html'
     success_url = reverse_lazy('members:list')
-
-    def get_context_data(self, **kwargs):
-        dt = super().get_context_data(**kwargs)
-        if self.request.POST:
-            dt['phone'] = self.PhoneFormset(self.request.POST)
-        else:
-            dt['phone'] = self.PhoneFormset()
-        return dt
-
+'''
     def form_valid(self, form):
         context = self.get_context_data()
         phone = context['phone']
@@ -58,7 +48,7 @@ class CreateView(LoginRequiredMixin, generic.edit.CreateView):
             phone.instance = self.object
             phone.save()
         return super().form_valid(form)
-
+'''
 
 class UpdateView(LoginRequiredMixin, generic.edit.UpdateView):
     PhoneFormset = inlineformset_factory(Member, Phone, fields=('number',))

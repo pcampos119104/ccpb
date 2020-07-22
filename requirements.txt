@@ -2,4 +2,3 @@ Django==3.0.8
 psycopg2==2.8.5
 django-weasyprint==1.0.1
 django-filter==2.3.0
-django-bootstrap4==2.2.0

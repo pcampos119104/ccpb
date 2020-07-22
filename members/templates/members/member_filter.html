@@ -1,5 +1,41 @@
 {% extends "members/base_members.html" %}
-{% block content_display %}
+{% block content %}
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav ml-auto">
+
+            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+            <li class="nav-item dropdown no-arrow d-sm-none">
+              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-search fa-fw"></i>
+              </a>
+              <!-- Dropdown - Messages -->
+              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                <form class="form-inline mr-auto w-100 navbar-search">
+                  <div class="input-group">
+			  <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar membro..." aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search fa-sm"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </li>
+
+                        <!-- Nav Item - Messages -->
+            <li class="nav-item dropdown no-arrow mx-1">
+                    <button type="submit" form="list_form" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm ">
+			<i class="fas fa-download fa-sm text-white-50"></i>
+                        Gerar carteirinhas
+                    </button>
+            </li>
+
+          </ul>
+
+        </nav>
+        <!-- End of Topbar -->
+
              <form id="search_form" action="" method="get" class="left">
                 {% csrf_token %}
                 <div class="input-field">
@@ -11,9 +47,6 @@
         <div class="nav-wrapper light-blue lighten-2">
             <ul class="right hide-on-med-and-down">
                 <li>
-                    <button type="submit" form="list_form" class="waves-effect waves-light btn-flat">
-                        Gerar carteirinhas
-                    </button>
 		</li>
             </ul>
         </div>
@@ -28,7 +61,7 @@
                                    value="{{ m.id }}"/>
                             <span> </span>
                         </label></th>
-                        <th><a href="{% url 'members:detail' m.id %}"><h5>{{ m.name }}</h5></a></th>
+                        <th><a href="{% url 'members:detail' m.id %}"><h5>{{ m.name_member }}</h5></a></th>
                     </tr>
                 {% endfor %}
             </table>
