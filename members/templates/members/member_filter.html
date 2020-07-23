@@ -1,5 +1,27 @@
 {% extends "members/base_members.html" %}
-{% block content %}
+{% block topbar %}
+       <!-- End of Topbar -->
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+          <!-- Sidebar Toggle (Topbar) -->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+
+                <form id="search_form" action="" method="get" class="form-inline mr-auto w-100 navbar-search">
+                {% csrf_token %}
+                  <div class="input-group">
+			  {{ filter.form.name_member}}
+                   	 <div class="input-group-append">
+			    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search fa-sm"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+
+
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
 
@@ -8,52 +30,28 @@
               <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-search fa-fw"></i>
               </a>
-              <!-- Dropdown - Messages -->
-              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
-                  <div class="input-group">
-			  <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar membro..." aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
+
+
             </li>
 
-                        <!-- Nav Item - Messages -->
+            <!-- Nav Item - Messages -->
             <li class="nav-item dropdown no-arrow mx-1">
                     <button type="submit" form="list_form" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm ">
 			<i class="fas fa-download fa-sm text-white-50"></i>
                         Gerar carteirinhas
                     </button>
             </li>
-
           </ul>
-
         </nav>
         <!-- End of Topbar -->
 
-             <form id="search_form" action="" method="get" class="left">
-                {% csrf_token %}
-                <div class="input-field">
-			{{ filter.form.as_p }}
-			<input type="submit" />
-                </div>
-            </form>
-    <nav>
-        <div class="nav-wrapper light-blue lighten-2">
-            <ul class="right hide-on-med-and-down">
-                <li>
-		</li>
-            </ul>
-        </div>
-    </nav>
+{% endblock %}
+
+{% block content %}
+<h2>Membros</h2>
     <form id="list_form" action="{{ action }}" method="post">
             {% csrf_token %}
-            <table class="striped">
+            <table class="table table-striped">
                 {% for m in filter.qs %}
                     <tr>
                         <th><label>
