@@ -2,6 +2,7 @@
 {% block content_display %}
 <h1>{{ member.name }}</h1>
 <ul>
+	<li>{{ member.address }}</li>
 {% for p in phone_list %}
     <li>{{ p.number }}</li>
 {% endfor %}

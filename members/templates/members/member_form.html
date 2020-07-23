@@ -1,17 +1,13 @@
 {% extends "members/base_members.html" %}
-{% block content_display %}
+{% block content %}
     <div class="container">
         <form method="post" class="validate">
             <h4>Cadastro</h4>
-            <table>
                 {% csrf_token %}
-                {{ form.as_p }}
-            </table>
-            <table>
-                <h4>Telefone</h4>
-                {{ phone.as_p }}
-            </table>
-            <input class="waves-effect waves-light btn" type="submit" value="Salvar">
+		<table>
+		{{ form.as_table }}
+		</table>
+            <input class="btn btn-primary" type="submit" value="Salvar">
         </form>
     </div>
 {% endblock %}
