@@ -36,7 +36,7 @@ class Member(models.Model):
         verbose_name_plural = 'membros'
 
     def __str__(self):
-        return self.name
+        return self.name_member
 
 
 class Phone(models.Model):
