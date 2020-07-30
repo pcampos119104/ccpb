@@ -12,8 +12,10 @@ services:
             - "8000:8000"
         depends_on:
             - db
-        env_file:
-          - ./.env.dev
+        environment:
+            - DEBUG=True
+#        env_file:
+#          - ./.env
 
     db:
         image: postgres
@@ -21,35 +23,24 @@ services:
         tty: true
         environment:
             - POSTGRES_DB=ccpb_db
-            - POSTGRES_USER=ccpbuser
+            - POSTGRES_USER=ccpb_user
             - POSTGRES_PASSWORD=etWejkaKv5w7LbQn
         volumes:
             - ./ccpb-pgdata:/var/lib/postgres/data
               
 
-#    pgadmin:
-#        image: dpage/pgadmin4
-#        container_name: ccpb-pgadmin
-#        tty: true
-#        environment:
-#          - PGADMIN_DEFAULT_EMAIL=admin@user.com
-#          - PGADMIN_DEFAULT_PASSWORD=123456
-#        ports:
-#        - "9000:80"
+    pgadmin:
+        image: dpage/pgadmin4
+        container_name: ccpb-pgadmin
+        tty: true
+        environment:
+          - PGADMIN_DEFAULT_EMAIL=admin@user.com
+          - PGADMIN_DEFAULT_PASSWORD=123456
+        ports:
+        - "9000:80"
+        logging:
+            driver: none
 
-<<<<<<< HEAD
-=======
-#    pgadmin:
-#        image: dpage/pgadmin4
-#        container_name: ccpb-pgadmin
-#        tty: true
-#        environment:
-#          - PGADMIN_DEFAULT_EMAIL=admin@user.com
-#          - PGADMIN_DEFAULT_PASSWORD=123456
-#        ports:
-#        - "9000:80"
-
->>>>>>> 6d4a99e... pdfgen
 volumes:
     ccpb-pgdata:
         external: true

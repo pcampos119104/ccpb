@@ -10,25 +10,48 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
+try:
+    from .local import *
+except ImportError:
+    pass
+
+# Pulling django-environ settings file, stored in Secret Manager
+import environ
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 from django.urls import reverse_lazy
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+env_file = os.path.join(BASE_DIR,  ".env")
+SETTINGS_NAME = "application_settings"
 
+DEBUG = os.getenv('DEBUG') == 'True'
+
+if not DEBUG:
+    import google.auth
+    from google.cloud import secretmanager_v1beta1 as sm
+
+    _, project = google.auth.default()
+
+    if project:
+        client = sm.SecretManagerServiceClient()
+        path = client.secret_version_path(project, SETTINGS_NAME, "latest")
+        payload = client.access_secret_version(path).payload.data.decode("UTF-8")
+
+        with open(env_file, "w") as f:
+            f.write(payload)
+
+env = environ.Env()
+env.read_env(env_file)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '*+g(u6arhp(5zkh*-!3$)+zqcu&tjmhhvcptwgz5xf#wa^hu!@'
+SECRET_KEY = env('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG')
-
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -79,6 +102,7 @@ WSGI_APPLICATION = 'ccpb.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -89,7 +113,9 @@ DATABASES = {
         'PORT': os.getenv('DB_PORT'),
     }
 }
+'''
 
+DATABASES = {"default": env.db()}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
