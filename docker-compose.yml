@@ -14,8 +14,6 @@ services:
             - db
         environment:
             - DEBUG=True
-#        env_file:
-#          - ./.env
 
     db:
         image: postgres
