@@ -1,6 +1,4 @@
 FROM python:3
-RUN useradd -ms /bin/bash django
-USER django
 
 ENV PYTHONUNBUFFERED 1
 

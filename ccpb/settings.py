@@ -152,7 +152,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
@@ -162,3 +161,9 @@ LOGIN_REDIRECT_URL = reverse_lazy('members:list')
 LOGOUT_REDIRECT_URL = reverse_lazy('accounts:login')
 LOGIN_URL = reverse_lazy('accounts:login')
 
+if not DEBUG:
+# Define static storage via django-storages[google]
+    GS_BUCKET_NAME = env("GS_BUCKET_NAME")
+    DEFAULT_FILE_STORAGE = "storages.backends.gcloud.GoogleCloudStorage"
+    STATICFILES_STORAGE = "storages.backends.gcloud.GoogleCloudStorage"
+    GS_DEFAULT_ACL = "publicRead"
